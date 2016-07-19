@@ -77,7 +77,19 @@ ArticleController.prototype = {
           callbacks(err, articles);
         }
       );
+  },
+
+  getHomePageArticles: function(callbacks) {
+
+    return Article.find().sort({
+      'updatedat': 'desc'
+    }).limit(18).exec(
+      function(err, articles) {
+        callbacks(err, articles);
+      }
+    );
   }
+
 };
 
 module.exports = new ArticleController();
