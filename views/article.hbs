@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Atricles</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.js"></script>
+      <!-- Custom CSS -->
+    <style>
+    body {
+        padding-top: 70px;
+        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    }
+    </style>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          Header will go here ..
+          <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container -->
+  </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+
+        <div class="row">
+           <div class="col-md-12">
+             <form id="savearticle" class="form-horizontal" role="form" action="../../articles" method="post">
+               <fieldset>
+
+                 <!-- Form Name -->
+                 <legend>Article</legend>
+
+                 <!-- Text input-->
+                 <div class="form-group">
+                   <label class="col-sm-2 control-label" for="textinput">Title</label>
+                   <div class="col-sm-10">
+                     <input type="text" placeholder="title" id="title" name ="title" class="form-control" value='{{#if this.article }} {{ this.article.title }} {{/if}}' >
+                   </div>
+                 </div>
+
+                 <!-- Text input-->
+                 <div class="form-group">
+                   <label class="col-sm-2 control-label" for="textinput">Author Name</label>
+                   <div class="col-sm-5">
+                     <input type="text" placeholder="Author"  id="author" name ="author" class="form-control" value='{{#if this.article }}{{  this.article.author }}{{/if}}' >
+                   </div>
+                 </div>
+
+                 <!-- Text input-->
+                 <div class="form-group">
+                   <label class="col-sm-2 control-label" for="textinput">Image Url</label>
+                   <div class="col-sm-6">
+                     <input type="text" placeholder="Image" id="articleimage" name="articleimage" class="form-control" value='{{#if this.article }}{{ this.article.articleimage }}{{/if}}'>
+                   </div>
+                 </div>
+
+                 <!-- Text input-->
+                 <div class="form-group">
+                   <label class="col-sm-2 control-label" for="textinput">Details</label>
+                   <div class="col-sm-10" >
+                     <div id="summernote">{{#if this.article }} {{ this.article.articledetails }} {{/if}} </div>
+                   </div>
+                 </div>
+
+                 <div class="form-group hide" >
+                   <label class="col-sm-2 control-label" for="textinput">Details</label>
+                   <div class="col-sm-10">
+                     <input type="textarea" placeholder="Article Details" name="articledetails" id="articledetails" class="form-control" value='{{#if this.article }}{{{ this.article.articledetails }}}{{/if}}' >
+                     <input type="textarea" placeholder="" name="articledetailstext" id="articledetailstext" class="form-control" value='{{#if this.article }}{{{ this.article.articledetailstext }}}{{/if}}' >
+                     <input type="text" value="{{category}}" id="categoryid" name="category" class="form-control">
+                     <input type="text" value="{{this.article._id}}" id="articleid" name="articleid" class="form-control">
+
+                   </div>
+                 </div>
+
+                 <div class="form-group">
+                   <div class="col-sm-offset-2 col-sm-10">
+                     <div class="pull-right">
+                       <button type="submit" name="cancel" class="btn btn-default" onclick=" return cancel('{{ category }}');" >Cancel</button>
+                       <button type="submit" name="save" class="btn btn-primary"  >Save</button>
+                     </div>
+                   </div>
+                 </div>
+
+               </fieldset>
+             </form>
+           </div><!-- /.col-lg-12 -->
+         </div>
+    </div>
+    <!-- /.container -->
+
+    <!-- Bootstrap Core JavaScript -->
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $('#summernote').summernote({
+          height: "250",
+
+          callbacks: {
+            onChange: function (contents, $editable) {
+              var code = $(this).summernote("code")
+                          .replace(/<\/p>/gi, "\n")
+                          .replace(/<br\/?>/gi, "\n")
+                          .replace(/<\/?[^>]+(>|$)/g, "");
+
+              $("#articledetails").val(contents);
+              $("#articledetailstext").val(code);
+            }
+          }
+      });
+    });
+
+
+
+    function cancel(categoryid){
+      window.location.href = '/articles/'+categoryid;
+      return false;
+    }
+
+  </script>
+
+</body>
+
+</html>

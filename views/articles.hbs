@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>{{ title }}</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+    integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link href="stylesheets/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css"/>
+
+    <!-- Custom CSS -->
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Telesom news</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="../articles/1">Home</a></li>
+          <li><a href="../articles/2">News</a></li>
+          <li><a href="../articles/3">Sports</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="../articles/{{ category }}/-1"><span class="glyphicon glyphicon-user"></span> Add Article</a></li>
+          <li><a href="../index"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+        {{#each data }}
+          <div class="well">
+              <div class="media">
+              	<a class="pull-left" href="#">
+            		<img class="media-object" src="{{this.articleimage}}" style="height:200px;width:200px;">
+          		</a>
+          		<div class="media-body">
+            		<h4 class="media-heading"><a href=""> {{this.title}}</a></h4>
+                  <p class="text-right">{{this.author}}</p>
+                  <div>{{{ this.articledetails  }}}</div>
+                  <ul class="list-inline list-unstyled">
+          			<li><span><i class="glyphicon glyphicon-calendar"></i>{{this.updatedat}} </span></li>
+                    <li>|</li>
+                    <span><i class="glyphicon glyphicon-comment"></i> 178 views</span>
+                    <li>|</li>
+                    <li>
+                       <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                    </li>
+                    <li>|</li>
+                    <li>
+                      <div id="types" class="btn-group">
+              	        <button name="color" type="button" class="btn btn-warning" value="btn-warning" onclick="editArticle('{{ category }}','{{ this._id }}')" >Edit</button>
+              	      </div>
+                    </li>
+        			</ul>
+               </div>
+            </div>
+          </div>
+        {{/each }}
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+    <!-- jQuery Version 1.11.1 -->
+    <script src="javascripts/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+    integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+      function editArticle(categoryid, articleid) {
+        window.location.href = '/articles/'+categoryid+'/'+articleid
+      }
+    </script>
+
+</body>
+
+</html>
