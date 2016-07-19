@@ -11,11 +11,11 @@ var ArticleController = function() {
 
 ArticleController.prototype = {
 
-  getUpdatedArticles: function(updatedTimestamp, category, callbacks) {
+  getUpdatedArticles: function(updatedTimestamp, callbacks) {
     return Article.find()
       .where('updatedat').gt(updatedTimestamp)
       .sort({
-        'updatedat': -1
+        'updatedat': 'desc'
       }).exec(
         function(err, articles) {
           callbacks(err, articles);
