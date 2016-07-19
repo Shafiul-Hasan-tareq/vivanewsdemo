@@ -15,7 +15,7 @@ ArticleController.prototype = {
     return Article.find()
       .where('updatedat').gt(updatedTimestamp)
       .sort({
-        "updatedat": 1
+        'updatedat': -1
       }).exec(
         function(err, articles) {
           callbacks(err, articles);
@@ -70,7 +70,7 @@ ArticleController.prototype = {
     return Article.find({
         "category": category
       }).sort({
-        "updatedat": 1
+        'updatedat': 'desc'
       }).skip((pagenumber - 1) * itemsperpage)
       .limit(itemsperpage).exec(
         function(err, articles) {
@@ -78,8 +78,6 @@ ArticleController.prototype = {
         }
       );
   }
-
 };
-
 
 module.exports = new ArticleController();
