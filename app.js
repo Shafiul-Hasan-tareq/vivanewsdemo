@@ -15,6 +15,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var articles = require('./routes/articles');
 var api = require('./routes/api');
+var showarticle = require('./routes/singlearticle');
 
 
 // Database connector
@@ -56,6 +57,7 @@ app.use('/index', routes);
 app.use('/users', users);
 app.use('/articles', articles);
 app.use('/api', api);
+app.use('/show', showarticle);
 
 
 // catch 404 and forward to error handler
