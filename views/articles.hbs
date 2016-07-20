@@ -38,9 +38,9 @@
           <a class="navbar-brand" href="#">Telesom news</a>
         </div>
         <ul class="nav navbar-nav">
-          <li class="active"><a href="../articles/1">Home</a></li>
-          <li><a href="../articles/2">News</a></li>
-          <li><a href="../articles/3">Sports</a></li>
+          <li {{#equal category 1 }}class="active"{{/equal}}><a href="../articles/1">Home</a></li>
+          <li {{#equal category 2 }}class="active"{{/equal}}><a href="../articles/2">News</a></li>
+          <li {{#equal category 3 }}class="active"{{/equal}}><a href="../articles/3">Sports</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li><a href="../articles/{{ category }}/-1"><span class="glyphicon glyphicon-user"></span> Add Article</a></li>
